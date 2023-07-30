@@ -1,0 +1,135 @@
+@extends('layouts.admin')
+
+@section('css')
+@endsection
+
+@section('content')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Halaman Transaction</a></li>
+        </ol>
+    </nav>
+
+    <div id="controller">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row flex-nowrap">
+                    <div class="col-md-3">
+                        <a href="#" class="btn btn-outline-primary btn-sm" @click="addData()">Add Data</a>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-inline float-md-right">
+                            <label for="filterStatus">Filter Status:</label>
+                            <select id="filterStatus" class="form-control mx-sm-2">
+                                <option>All</option>
+                                <option>Available</option>
+                                <option>Not Available</option>
+                            </select>
+                            <label for="filterTanggal">Filter Tanggal Pinjam:</label>
+                            <input type="date" id="filterTanggal" class="form-control mx-sm-2">
+                            <button class="btn btn-primary btn-sm">Filter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead style="background-color:rgb(203, 203, 203)">
+                            <tr class="text-center">
+                                <th scope="col">Tanggal Pinjam</th>
+                                <th scope="col">Tanggal Kembali</th>
+                                <th scope="col">Nama Peminjam</th>
+                                <th scope="col">Total Buku</th>
+                                <th scope="col">Total Bayar</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('js')
+    <script type="text/javascript">
+        var actionUrl = '{{ url('transactions') }}'; //variable global
+        var apiUrl = '{{ url('api/transactions') }}';
+
+        //untuk kolom data '' name nya harus sama di {{ url('api/authors') }}
+        var columns = [{
+                data: 'date_start',
+                class: 'text-center',
+                orderable: false
+            },
+            {
+                data: 'date_end',
+                class: 'text-center',
+                orderable: false
+            },
+            {
+                data: 'name_members',
+                class: 'text-center',
+                orderable: false
+            },
+            {
+                data: 'totalPinjam',
+                class: 'text-center',
+                orderable: false
+            },
+            {
+                data: 'totalBayar',
+                class: 'text-center',
+                orderable: false
+            },
+
+
+            {
+                render: function(index, row, data, meta) {
+                    return `<a href="#" class="btn btn-outline-primary rounded-end mr-2" onclick="controller.editData(event, ${meta.row})"><i class="fas fa-edit"></i></a><a href="#" class="btn btn-outline-primary rounded-end mr-2" onclick="controller.deleteData(event, ${data.id})"><i class="fas fa-trash"></i></a>`;
+                },
+
+                orderable: false,
+                width: '200px',
+                class: 'text-center'
+            },
+        ];
+
+        var app = new Vue({
+            el: "#controller",
+            data: {
+                transactions: [],
+                //search: "",
+                transaction: {},
+                actionUrl, // = actionUrl : actionUrl
+                apiUrl,
+                //editStatus: false,
+            },
+
+            mounted: function() {
+                this.get_transactions();
+            },
+            methods: {
+                get_transactions() {
+                    const _this = this;
+                    $.ajax({
+                        url: apiUrl,
+                        method: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            _this.transactions = data.data;
+                            //console.log(data)
+                            // _this.transactions = data;
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        },
+                    });
+                }
+            }
+        });
+    </script>
+@endsection

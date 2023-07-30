@@ -1,0 +1,5 @@
+jika menggunakan crud vue js,
+harus memasukkan cdn vue js dan axios di layouts/admin.blade.php pada code paling bawah.
+cdn vue js :
+
+tambahkan juga section css dan js pada head dan akhir file admin.blade.php

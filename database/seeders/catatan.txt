@@ -1,0 +1,6 @@
+cmd
+- php artisan make:seed CatalogSeeder
+untuk membuat CatalogSeeder
+
+-  php artisan db:seed --class=AuthorSeeder
+untuk push AuthorSeeder ke database

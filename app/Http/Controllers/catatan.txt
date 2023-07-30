@@ -1,0 +1,13 @@
+php artisan make:controller AuthorController --model==Author >>> agar terintegrasi langsung ke model
+php artisan make:controller BookController --model=Book
+php artisan make:controller CatalogController --model=Catalog
+php artisan make:controller PublisherController --model=Publisher
+php artisan make:controller MemberController --model=Member
+ 
+
+     // with untuk memanggil function user di model member
+        // $member = Member::with('user')->get();  untuk menampilkan data member dan foreign key nya dari table Member
+        // $books = Book::with('publisher')->get();
+        // $publisher = Publisher::with('books')->get();
+        // return $publisher;
+

@@ -1,0 +1,9 @@
+ return $this->hasOne('App\Models\User', 'member_id');
+
+ hasOne 1 - 1
+ untuk penamaan function
+ akhir kata tidak perlu di tambahkan s
+ hasMany 1 - Many
+  akhir kata perlu di tambahkan s
+ belongsTo many to 1
+  akhir kata tidak perlu di tambahkan s

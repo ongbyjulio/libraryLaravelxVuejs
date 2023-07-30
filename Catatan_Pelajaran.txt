@@ -1,0 +1,32 @@
+Memanggil data menggunakan FOREACH membuat halaman akan sangat lemot
+jika menggunakan metode tsb.
+
+Jadi untuk memecahkan masalah tsb, harus menggunakan FvI => menggunakan datatables
+
+
+Bumn @Ongky123ongky
+cara :
+instal plugin baru bernama yajr
+ketikkan kode berikut ke composer 
+composer require yajra/laravel-datatables-oracle:"~9.0"
+
+Ketika sudah selesai :
+Masuk ke Controller, contohnya ada disana.
+
+ //  {
+                    //     //  <a href="#" class="btn btn-outline-primary rounded-end mr-2"
+                    //     //                                     @click="editData({{ $author }})">
+                    //     //                                     <i class="fas fa-edit"></i>
+                    //     //                                 </a>
+
+                    //     //                                 <a href="#" class="btn btn-outline-primary rounded-end mr-2"
+                    //     //                                     @click="deleteData({{ $author->id }})">
+                    //     //                                     <i class="fas fa-trash"></i>
+                    //     //                                 </a>  
+                    // }
+
+                    Jika Anda sudah memastikan kedua langkah di atas, pastikan juga untuk 
+                    membersihkan cache aplikasi Laravel Anda. 
+                    Jalankan perintah php artisan cache:clear untuk membersihkan cache,
+                    dan perintah php artisan view:clear untuk membersihkan cache tampilan. 
+                    Restart server web Anda setelah membersihkan cache.
